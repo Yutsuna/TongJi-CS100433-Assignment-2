@@ -5,7 +5,6 @@
 {
   nativeBuildInputs = with pkgs; [
     gnumake
-    ninja
     pkg-config
     ccache
     gdb
@@ -15,7 +14,6 @@
   ];
 
   buildInputs = with pkgs; [
-    sdl3
     glm
   ];
 }
