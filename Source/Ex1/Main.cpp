@@ -1,20 +1,13 @@
 /// @file Main.cpp
 /// @brief Exercise 1
 
+#include <Lib/Check.hpp>
 #include <Lib/CoreTypes.hpp>
 #include <Lib/Maths.hpp>
 #include <Lib/Reflect.hpp>
 
 namespace
 {
-
-CS::Bool Check ( std::string_view Statement, const auto &Lhs, const auto &Rhs ) noexcept
-{
-    const CS::Bool Holds = CS::IsEqual( Lhs, Rhs );
-
-    std::println( "  [{}] {}", Holds ? "OK  " : "FAIL", Statement );
-    return Holds;
-}
 
 struct FTransfromation final
 {
@@ -35,19 +28,19 @@ struct FTransfromation final
         CS::Bool Holds = true;
 
         /// p' = (T_1 · T_2^local · T_1^(-1)) · T_1 · p
-        Holds &= Check( "PPrime == (T1 * T2Local * T1Inverse) * T1 * P", PPrime, ( T1 * T2Local * T1Inverse ) * T1 * P );
+        Holds &= CS::Check( "PPrime == (T1 * T2Local * T1Inverse) * T1 * P", PPrime, ( T1 * T2Local * T1Inverse ) * T1 * P );
 
         /// p' = T_1 · T_2^local · p
-        Holds &= Check( "PPrime == T1 * T2Local * P", PPrime, T1 * T2Local * P );
+        Holds &= CS::Check( "PPrime == T1 * T2Local * P", PPrime, T1 * T2Local * P );
 
         /// T_2^global · T_1 = T_1 · T_2^local
-        Holds &= Check( "T2Global * T1 == T1 * T2Local", T2Global * T1, T1 * T2Local );
+        Holds &= CS::Check( "T2Global * T1 == T1 * T2Local", T2Global * T1, T1 * T2Local );
 
         /// T_2^global · T_1 = T_1 · (T_1^(-1) · T_2^global · T_1)
-        Holds &= Check( "T2Global * T1 == T1 * (T1Inverse * T2Global * T1)", T2Global * T1, T1 * ( T1Inverse * T2Global * T1 ) );
+        Holds &= CS::Check( "T2Global * T1 == T1 * (T1Inverse * T2Global * T1)", T2Global * T1, T1 * ( T1Inverse * T2Global * T1 ) );
 
         /// T_1^(-1) · T_2^global · T_1 = T_2^local
-        Holds &= Check( "T1Inverse * T2Global * T1 == T2Local", T1Inverse * T2Global * T1, T2Local );
+        Holds &= CS::Check( "T1Inverse * T2Global * T1 == T2Local", T1Inverse * T2Global * T1, T2Local );
 
         return Holds;
     }
@@ -63,15 +56,21 @@ CS::Bool CheckAgainstGlm ( const glm::dmat4 &T1 ) noexcept
 
     const auto GlobalOf = [&] ( const glm::dmat4 &T2Local ) noexcept
     {
-        return FTransfromation{ .P = glm::dvec4( 0.0, 0.0, 0.0, 1.0 ), .T1 = T1, .T2Local = T2Local }.T2Global * T1;
+        return FTransfromation{
+            .P = glm::dvec4( 0.0, 0.0, 0.0, 1.0 ),
+            .T1 = T1,
+            .T2Local = T2Local
+        }.T2Global * T1;
     };
 
-    Holds &= Check( "glm::translate(T1, Offset) == T2Global * T1",
-                    glm::translate( T1, Offset ),GlobalOf( CS::Translation( Offset ) ) );
-    Holds &= Check( "glm::rotate(T1, Angle, Axis) == T2Global * T1",
-                    glm::rotate( T1, Angle, glm::normalize( Axis ) ), GlobalOf( CS::Rotation( Angle, Axis ) ) );
-    Holds &= Check( "glm::scale(T1, Factors) == T2Global * T1",
-                    glm::scale( T1, Factors ), GlobalOf( CS::Scaling( Factors ) ) );
+    Holds &= CS::Check( "glm::translate(T1, Offset) == T2Global * T1",
+                        glm::translate( T1, Offset ), GlobalOf( CS::Translation( Offset ) ) );
+
+    Holds &= CS::Check( "glm::rotate(T1, Angle, Axis) == T2Global * T1",
+                        glm::rotate( T1, Angle, glm::normalize( Axis ) ), GlobalOf( CS::Rotation( Angle, Axis ) ) );
+
+    Holds &= CS::Check( "glm::scale(T1, Factors) == T2Global * T1",
+                        glm::scale( T1, Factors ), GlobalOf( CS::Scaling( Factors ) ) );
     return Holds;
 }
 
@@ -88,5 +87,5 @@ CS::Int32 main () noexcept
     CS::Dump( Example );
     CS::Bool ReturnValue = Example.Verify();
 
-    return static_cast<CS::Int32>(ReturnValue &= CheckAgainstGlm(Example.T1));
+    return static_cast<CS::Int32>( ReturnValue &= CheckAgainstGlm( Example.T1 ) );
 }
