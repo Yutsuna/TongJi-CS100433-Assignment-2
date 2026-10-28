@@ -30,6 +30,33 @@ static inline glm::dmat4 Scaling ( const glm::dvec3 &Factors )
     return glm::scale( glm::dmat4( 1.0 ), Factors );
 }
 
+static inline glm::dmat4
+Orthographic ( CS::Float64 L, CS::Float64 R, CS::Float64 B, CS::Float64 T, CS::Float64 Near, CS::Float64 Far ) noexcept
+{
+    glm::dmat4 M( 1.0 );
+
+    M[0][0] = 2.0 / ( R - L );
+    M[1][1] = 2.0 / ( T - B );
+    M[2][2] = -2.0 / ( Far - Near );
+    M[3][0] = -( R + L ) / ( R - L );
+    M[3][1] = -( T + B ) / ( T - B );
+    M[3][2] = -( Far + Near ) / ( Far - Near );
+    return M;
+}
+
+static inline glm::dmat4 Perspective ( CS::Float64 FovY, CS::Float64 Aspect, CS::Float64 Near, CS::Float64 Far ) noexcept
+{
+    const CS::Float64 TanHalfFovY = std::tan( FovY / 2.0 );
+    glm::dmat4 M( 0.0 );
+
+    M[0][0] = 1.0 / ( Aspect * TanHalfFovY );
+    M[1][1] = 1.0 / TanHalfFovY;
+    M[2][2] = -( Far + Near ) / ( Far - Near );
+    M[2][3] = -1.0;
+    M[3][2] = -( 2.0 * Far * Near ) / ( Far - Near );
+    return M;
+}
+
 template <Int32 Length>
 static inline Bool IsEqual ( const glm::vec<Length, Float64> &A, const glm::vec<Length, Float64> &B ) noexcept
 {
