@@ -2,6 +2,7 @@
 /// @brief OpenGLApi implementation
 
 #include <Ex7/OpenGL/OpenGLApi.hpp>
+#include <Lib/CoreTypes.hpp>
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>

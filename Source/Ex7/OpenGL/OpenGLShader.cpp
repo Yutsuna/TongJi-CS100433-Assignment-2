@@ -1,7 +1,7 @@
 /// @file OpenGLShader.cpp
 /// @brief Shader file preprocessing, compilation and linking
 
-#include <Ex7/OpenGLShader.hpp>
+#include <Ex7/OpenGL/OpenGLShader.hpp>
 
 #include <fstream>
 #include <sstream>
