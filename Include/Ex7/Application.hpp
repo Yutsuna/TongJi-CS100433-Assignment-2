@@ -31,7 +31,6 @@ private:
 
     GL::FOpenGLWindow &Window;
     GL::FOpenGLContext &Context;
-    const GL::FOpenGLApi &Api;
 
     FTimer Timer;
     FCamera Camera;

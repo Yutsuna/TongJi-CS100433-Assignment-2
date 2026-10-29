@@ -10,6 +10,8 @@
 #include <stdexcept>
 #include <string>
 
+const CS::GL::FOpenGLApi CS::GL::Api={};
+
 namespace
 {
 

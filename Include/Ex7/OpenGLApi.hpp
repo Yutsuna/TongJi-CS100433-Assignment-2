@@ -159,13 +159,10 @@ namespace GL
 
     public:
 
-        [[nodiscard]] const FOpenGLApi &GetApi () const noexcept;
         void SwapBuffers ( const FOpenGLWindow &InWindow ) const noexcept;
-
-    private:
-
-        FOpenGLApi Api;
     };
+
+    extern const FOpenGLApi Api;
 
 } // namespace GL
 

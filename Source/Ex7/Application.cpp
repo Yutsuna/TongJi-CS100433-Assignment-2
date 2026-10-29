@@ -26,9 +26,9 @@ constexpr CS::Float32 GTimeFactor = 1.25F;
 ///
 
 CS::FApplication::FApplication ( GL::FOpenGLWindow &InWindow, GL::FOpenGLContext &InContext )
-    : Window( InWindow ), Context( InContext ), Api( Context.GetApi() )
+    : Window( InWindow ), Context( InContext )
 {
-    ///
+    Api = Context.GetApi();
 }
 
 void CS::FApplication::Run () noexcept

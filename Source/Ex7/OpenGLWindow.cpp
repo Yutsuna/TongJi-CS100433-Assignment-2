@@ -151,11 +151,6 @@ CS::GL::FOpenGLContext::FOpenGLContext ( const FOpenGLWindow &Window )
     Api.Load();
 }
 
-const CS::GL::FOpenGLApi &CS::GL::FOpenGLContext::GetApi () const noexcept
-{
-    return Api;
-}
-
 CS::Bool CS::GL::FOpenGLWindow::WasKeyPressed ( const Int32 Key ) const noexcept
 {
     return std::ranges::contains( WindowState->PressedKeys, Key );
