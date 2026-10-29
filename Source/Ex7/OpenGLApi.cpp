@@ -1,8 +1,8 @@
 /// @file OpenGLApi.cpp
 /// @brief OpenGLApi implementation
 
-#include <Lib/CoreTypes.hpp>
 #include <Ex7/OpenGLApi.hpp>
+#include <Lib/CoreTypes.hpp>
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
