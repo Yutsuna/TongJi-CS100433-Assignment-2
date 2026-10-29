@@ -52,8 +52,8 @@ struct FPlanet final
                       0.70F,
                       0.F,
                       0.03F,
-                      { 0.25F, 0.19F, 0.15F },
-                      { 0.68F, 0.48F, 0.32F },
+                      { 0.58F, 0.55F, 0.52F },
+                      { 0.30F, 0.28F, 0.27F },
                       3.8F,
                       1.6F,
                       0.05F,
@@ -70,8 +70,8 @@ struct FPlanet final
                       -0.18F,
                       0.F,
                       0.05F,
-                      { 0.48F, 0.25F, 0.07F },
-                      { 0.95F, 0.73F, 0.32F },
+                      { 0.92F, 0.76F, 0.46F },
+                      { 0.78F, 0.56F, 0.30F },
                       3.1F,
                       1.2F,
                       0.48F,
@@ -88,8 +88,8 @@ struct FPlanet final
                       0.85F,
                       0.F,
                       0.41F,
-                      { 0.025F, 0.12F, 0.34F },
-                      { 0.16F, 0.48F, 0.20F },
+                      { 0.10F, 0.32F, 0.78F },
+                      { 0.22F, 0.52F, 0.24F },
                       3.4F,
                       1.8F,
                       0.08F,
@@ -106,8 +106,8 @@ struct FPlanet final
                       0.80F,
                       0.F,
                       0.44F,
-                      { 0.30F, 0.075F, 0.035F },
-                      { 0.78F, 0.30F, 0.12F },
+                      { 0.78F, 0.34F, 0.20F },
+                      { 0.46F, 0.20F, 0.12F },
                       4.2F,
                       1.5F,
                       0.12F,
@@ -124,8 +124,8 @@ struct FPlanet final
                       1.25F,
                       0.F,
                       0.06F,
-                      { 0.32F, 0.18F, 0.10F },
-                      { 0.88F, 0.72F, 0.48F },
+                      { 0.82F, 0.64F, 0.46F },
+                      { 0.58F, 0.38F, 0.26F },
                       2.4F,
                       1.0F,
                       0.88F,
@@ -142,8 +142,8 @@ struct FPlanet final
                       1.10F,
                       0.F,
                       0.47F,
-                      { 0.40F, 0.32F, 0.17F },
-                      { 0.90F, 0.79F, 0.52F },
+                      { 0.92F, 0.82F, 0.56F },
+                      { 0.74F, 0.62F, 0.40F },
                       2.6F,
                       0.9F,
                       0.82F,
@@ -160,8 +160,8 @@ struct FPlanet final
                       0.92F,
                       0.F,
                       0.50F,
-                      { 0.025F, 0.08F, 0.30F },
-                      { 0.10F, 0.42F, 0.75F },
+                      { 0.20F, 0.35F, 0.88F },
+                      { 0.10F, 0.20F, 0.65F },
                       3.0F,
                       1.2F,
                       0.38F,
@@ -235,8 +235,8 @@ struct CS::FSolarSystem::FResources final
         StarShader.SetUniform( "TwinkleSpeed", 2.6F );
         const Float32 PointSizeScale = std::clamp( static_cast<Float32>( RenderView.Viewport.y ) / 720.F, 0.75F, 2.F );
         StarShader.SetUniform( "PointSizeScale", PointSizeScale );
-        StarShader.SetUniform( "StarColorCold", glm::fvec3{ 0.52F, 0.68F, 1.F } );
-        StarShader.SetUniform( "StarColorWarm", glm::fvec3{ 1.F, 0.79F, 0.53F } );
+        StarShader.SetUniform( "StarColorCold", glm::fvec3{ 0.65F, 0.78F, 1.F } );
+        StarShader.SetUniform( "StarColorWarm", glm::fvec3{ 1.F, 0.82F, 0.62F } );
         Stars.Draw();
     }
 
@@ -272,11 +272,11 @@ struct CS::FSolarSystem::FResources final
         SetViewUniforms( SunShader, RenderView );
         SunShader.SetUniform( "ModelMatrix", Model );
         SunShader.SetUniform( "CameraPosition", RenderView.Camera );
-        SunShader.SetUniform( "EmissionColor", glm::fvec3{ 1.F, 0.24F, 0.015F } );
-        SunShader.SetUniform( "HotColor", glm::fvec3{ 1.F, 0.78F, 0.18F } );
-        SunShader.SetUniform( "EmissionIntensity", 1.55F );
-        SunShader.SetUniform( "GranulationScale", 3.6F );
-        SunShader.SetUniform( "GranulationSpeed", 0.11F );
+        SunShader.SetUniform( "EmissionColor", glm::fvec3{ 1.F, 0.52F, 0.10F } );
+        SunShader.SetUniform( "HotColor", glm::fvec3{ 1.F, 0.88F, 0.50F } );
+        SunShader.SetUniform( "EmissionIntensity", 1.25F );
+        SunShader.SetUniform( "GranulationScale", 2.2F );
+        SunShader.SetUniform( "GranulationSpeed", 0.12F );
         SunShader.SetUniform( "Time", RenderView.TotalTime );
         Sphere.Draw();
     }
@@ -287,10 +287,10 @@ struct CS::FSolarSystem::FResources final
         SetViewUniforms( PlanetShader, RenderView );
         PlanetShader.SetUniform( "CameraPosition", RenderView.Camera );
         PlanetShader.SetUniform( "LightPosition", glm::fvec3{ 0.F } );
-        PlanetShader.SetUniform( "LightColor", glm::fvec3{ 1.F, 0.91F, 0.76F } );
-        PlanetShader.SetUniform( "LightIntensity", 3.F );
-        PlanetShader.SetUniform( "LightFalloff", 0.0018F );
-        PlanetShader.SetUniform( "AmbientStrength", 0.055F );
+        PlanetShader.SetUniform( "LightColor", glm::fvec3{ 1.F, 0.92F, 0.80F } );
+        PlanetShader.SetUniform( "LightIntensity", 1.9F );
+        PlanetShader.SetUniform( "LightFalloff", 0.0009F );
+        PlanetShader.SetUniform( "AmbientStrength", 0.06F );
 
         for ( const FPlanet &Planet : Planets )
         {
@@ -318,8 +318,8 @@ struct CS::FSolarSystem::FResources final
         SetViewUniforms( HaloShader, RenderView );
         HaloShader.SetUniform( "HaloCenter", glm::fvec3{ 0.F } );
         HaloShader.SetUniform( "HaloSize", 9.2F );
-        HaloShader.SetUniform( "HaloColor", glm::fvec3{ 1.F, 0.34F, 0.055F } );
-        HaloShader.SetUniform( "HaloIntensity", 0.72F );
+        HaloShader.SetUniform( "HaloColor", glm::fvec3{ 1.F, 0.58F, 0.18F } );
+        HaloShader.SetUniform( "HaloIntensity", 1.1F );
         HaloShader.SetUniform( "RayCount", 14.F );
         HaloShader.SetUniform( "RayStrength", 0.22F );
         HaloShader.SetUniform( "RayRotationSpeed", 0.05F );
