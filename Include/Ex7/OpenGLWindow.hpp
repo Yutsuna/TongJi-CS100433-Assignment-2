@@ -5,7 +5,8 @@
 
 #include <Lib/CoreTypes.hpp>
 
-#include <glm/vec2.hpp>
+#include <glm/fwd.hpp>
+#include <memory>
 
 struct GLFWwindow;
 
@@ -14,6 +15,15 @@ namespace CS
 
 namespace GL
 {
+
+    struct FWindowState;
+
+    struct FFrameBufferSize
+
+    {
+        Int32 Width  = 0;
+        Int32 Height = 0;
+    };
 
     /// @class FOpenGLWindow
     /// @brief OpenGL GLFW Window wrapper
@@ -32,19 +42,19 @@ namespace GL
         [[nodiscard]] GLFWwindow *GetNativeHandle () const noexcept;
         [[nodiscard]] glm::ivec2 GetFrameBufferSize () const noexcept;
         [[nodiscard]] Bool ShouldClose () const noexcept;
+        [[nodiscard]] Bool WasKeyPressed ( Int32 Key ) const noexcept;
+        [[nodiscard]] FFrameBufferSize GetFramebufferSize () const noexcept;
+        [[nodiscard]] glm::fvec2 GetDragDelta () const noexcept;
+        [[nodiscard]] Float32 GetScrollDelta () const noexcept;
 
     public:
 
         void RequestClose () const noexcept;
-        static void PollEvents () noexcept;
+        void PollEvents () noexcept;
 
     private:
 
-        static void FramebufferSizeCallback ( GLFWwindow *Handle, Int32 Width, Int32 Height ) noexcept;
-
-        GLFWwindow *WindowHandle = nullptr;
-        Int32 FramebufferWidth    = 0;
-        Int32 FramebufferHeight   = 0;
+        std::unique_ptr<FWindowState> WindowState;
     };
 
 } // namespace GL

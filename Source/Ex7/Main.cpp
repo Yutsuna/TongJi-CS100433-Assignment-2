@@ -8,19 +8,17 @@
 namespace
 {
 
-
-
 }
 
-CS::Int32 main ( ) noexcept
+CS::Int32 main () noexcept
 {
     try
     {
         ///
     }
-    catch (const std::exception &Exception )
+    catch ( const std::exception &Exception )
     {
-        std::println(stderr, "FATAL ERROR: {}", Exception.what());
+        std::println( stderr, "FATAL ERROR: {}", Exception.what() );
         return 84;
     }
     return 0;
