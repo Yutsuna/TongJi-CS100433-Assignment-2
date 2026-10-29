@@ -1,5 +1,5 @@
 CXX      := g++
-CXXFLAGS := -std=gnu++26 -freflection -Wall -Wextra -Wpedantic -Werror -Wconversion -IInclude
+CXXFLAGS := -std=gnu++26 -freflection -O3 -IInclude #-Wall -Wextra -Wpedantic -Werror -Wconversion -IInclude
 DEPFLAGS := -MMD -MP
 LDLIBS   := -lm -lglm
 LDLIBS_Ex7 := -lglfw -lGL
