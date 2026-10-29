@@ -4,7 +4,6 @@
 #include <Ex7/OpenGL/OpenGLApi.hpp>
 #include <Ex7/OpenGL/OpenGLMesh.hpp>
 
-#include <cstddef>
 #include <glm/vec2.hpp>
 #include <utility>
 
@@ -21,7 +20,7 @@ CS::GL::FOpenGLMesh::FOpenGLMesh ( const UInt32 InVertexArrayId,
     ///
 }
 
-CS::GL::FOpenGLMesh::FOpenGLMesh ( FMesh &&Other ) noexcept
+CS::GL::FOpenGLMesh::FOpenGLMesh ( FOpenGLMesh &&Other ) noexcept
     : VertexArrayId( std::exchange( Other.VertexArrayId, 0 ) ), VertexBufferId( std::exchange( Other.VertexBufferId, 0 ) ),
       IndexBufferId( std::exchange( Other.IndexBufferId, 0 ) ), VertexCount( std::exchange( Other.VertexCount, 0 ) ),
       IndexCount( std::exchange( Other.IndexCount, 0 ) ), PrimitiveMode( std::exchange( Other.PrimitiveMode, 0 ) ),
@@ -30,7 +29,7 @@ CS::GL::FOpenGLMesh::FOpenGLMesh ( FMesh &&Other ) noexcept
     ///
 }
 
-CS::GL::FOpenGLMesh &CS::GL::FOpenGLMesh::operator=( FMesh &&Other ) noexcept
+CS::GL::FOpenGLMesh &CS::GL::FOpenGLMesh::operator=( FOpenGLMesh &&Other ) noexcept
 {
     if ( this != &Other )
     {
@@ -46,7 +45,7 @@ CS::GL::FOpenGLMesh &CS::GL::FOpenGLMesh::operator=( FMesh &&Other ) noexcept
     return *this;
 }
 
-CS::GL::FOpenGLMesh::~FMesh() noexcept
+CS::GL::FOpenGLMesh::~FOpenGLMesh() noexcept
 {
     Release();
 }
