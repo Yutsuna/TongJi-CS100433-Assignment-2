@@ -1,8 +1,7 @@
 /// @file OpenGLApi.cpp
 /// @brief OpenGLApi implementation
 
-#include <Ex7/OpenGLApi.hpp>
-#include <Lib/CoreTypes.hpp>
+#include <Ex7/OpenGL/OpenGLApi.hpp>
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -10,7 +9,7 @@
 #include <stdexcept>
 #include <string>
 
-const CS::GL::FOpenGLApi CS::GL::Api={};
+CS::GL::FOpenGLApi CS::GL::Api = {};
 
 namespace
 {

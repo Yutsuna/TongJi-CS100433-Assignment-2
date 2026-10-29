@@ -1,13 +1,10 @@
 /// @file OpenGLWindow.cpp
 /// @brief OpenGLWindow implementation
 
-#include "Lib/CoreTypes.hpp"
-#include <algorithm>
-#include <glm/fwd.hpp>
 #define GLFW_INCLUDE_NONE
 
-#include <Ex7/OpenGLApi.hpp>
-#include <Ex7/OpenGLWindow.hpp>
+#include <Ex7/OpenGL/OpenGLApi.hpp>
+#include <Ex7/OpenGL/OpenGLWindow.hpp>
 
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -82,7 +79,6 @@ CS::GL::FOpenGLWindow::FOpenGLWindow ( Int32 Width, Int32 Height, const AnsiChar
     glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
     glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3 );
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
-    glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
     glfwWindowHint( GLFW_SAMPLES, 4 );
 #if defined( __APPLE__ )
     glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE );
@@ -107,6 +103,11 @@ CS::GL::FOpenGLWindow::FOpenGLWindow ( Int32 Width, Int32 Height, const AnsiChar
 CS::GL::FOpenGLWindow::~FOpenGLWindow () noexcept
 {
     glfwDestroyWindow( WindowState->WindowHandle );
+}
+
+GLFWwindow *CS::GL::FOpenGLWindow::GetNativeHandle () const noexcept
+{
+    return WindowState->WindowHandle;
 }
 
 CS::Bool CS::GL::FOpenGLWindow::ShouldClose () const noexcept

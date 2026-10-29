@@ -45,6 +45,45 @@
 #ifndef GL_MULTISAMPLE
     #define GL_MULTISAMPLE 0x809D
 #endif
+#ifndef GL_POINTS
+    #define GL_POINTS 0x0000
+#endif
+#ifndef GL_LINE_LOOP
+    #define GL_LINE_LOOP 0x0002
+#endif
+#ifndef GL_TRIANGLES
+    #define GL_TRIANGLES 0x0004
+#endif
+#ifndef GL_TRIANGLE_STRIP
+    #define GL_TRIANGLE_STRIP 0x0005
+#endif
+#ifndef GL_DEPTH_TEST
+    #define GL_DEPTH_TEST 0x0B71
+#endif
+#ifndef GL_BLEND
+    #define GL_BLEND 0x0BE2
+#endif
+#ifndef GL_LEQUAL
+    #define GL_LEQUAL 0x0203
+#endif
+#ifndef GL_SRC_ALPHA
+    #define GL_SRC_ALPHA 0x0302
+#endif
+#ifndef GL_ONE
+    #define GL_ONE 1
+#endif
+#ifndef GL_FLOAT
+    #define GL_FLOAT 0x1406
+#endif
+#ifndef GL_UNSIGNED_INT
+    #define GL_UNSIGNED_INT 0x1405
+#endif
+#ifndef GL_COLOR_BUFFER_BIT
+    #define GL_COLOR_BUFFER_BIT 0x00004000
+#endif
+#ifndef GL_DEPTH_BUFFER_BIT
+    #define GL_DEPTH_BUFFER_BIT 0x00000100
+#endif
 
 namespace CS
 {
@@ -162,7 +201,7 @@ namespace GL
         void SwapBuffers ( const FOpenGLWindow &InWindow ) const noexcept;
     };
 
-    extern const FOpenGLApi Api;
+    extern FOpenGLApi Api;
 
 } // namespace GL
 
