@@ -17,29 +17,30 @@ class FTimer
 
 public:
 
-    FTimer() noexcept : StartTime(FClock::now()), LastTickTime(StartTime)
+    FTimer () noexcept : StartTime( FClock::now() ), LastTickTime( StartTime )
     {
         ///
     }
 
-    [[nodiscard]] Float32 Tick() noexcept
+    [[nodiscard]] Float32 Tick () noexcept
     {
-        const FClock::time_point Now = FClock::now();
+        const FClock::time_point Now                 = FClock::now();
         const std::chrono::duration<Float32> Elapsed = Now - LastTickTime;
-        LastTickTime = Now;
-        return std::min(Elapsed.count(), MaxDeltaTime);
+        LastTickTime                                 = Now;
+        return std::min( Elapsed.count(), MaxDeltaTime );
     }
 
-    [[nodiscard]] Float32 GetTotalTime() const noexcept
+    [[nodiscard]] Float32 GetTotalTime () const noexcept
     {
-        return std::chrono::duration<Float32>(FClock::now() - StartTime).count();
+        return std::chrono::duration<Float32>( FClock::now() - StartTime ).count();
     }
 
 private:
+
     static constexpr Float32 MaxDeltaTime = 0.F;
 
     FClock::time_point StartTime;
     FClock::time_point LastTickTime;
 };
 
-}
+} // namespace CS

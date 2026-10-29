@@ -139,9 +139,9 @@ void CS::GL::FOpenGLWindow::PollEvents () noexcept
     WindowState->LastCursor   = Cursor;
 }
 
-void CS::GL::FOpenGLWindow::SwapBuffers() noexcept
+void CS::GL::FOpenGLWindow::SwapBuffers () noexcept
 {
-    glfwSwapBuffers(WindowState->WindowHandle);
+    glfwSwapBuffers( WindowState->WindowHandle );
 }
 
 CS::GL::FOpenGLContext::FOpenGLContext ( const FOpenGLWindow &Window )
@@ -169,12 +169,12 @@ CS::GL::FFrameBufferSize CS::GL::FOpenGLWindow::GetFramebufferSize () const noex
     return Size;
 }
 
-glm::fvec2 CS::GL::FOpenGLWindow::GetDragDelta() const noexcept
+glm::fvec2 CS::GL::FOpenGLWindow::GetDragDelta () const noexcept
 {
     return WindowState->DragDelta;
 }
 
-CS::Float32 CS::GL::FOpenGLWindow::GetScrollDelta() const noexcept
+CS::Float32 CS::GL::FOpenGLWindow::GetScrollDelta () const noexcept
 {
     return WindowState->ScrollDelta;
 }

@@ -9,8 +9,8 @@
 namespace CS
 {
 
-    class FTimer;
-    class FCamera;
+class FTimer;
+class FCamera;
 
 /// @class FApplication
 /// @brief Main Application
@@ -24,10 +24,10 @@ public:
 
 private:
 
-    void OneFrame() noexcept;
-    void HandleUserInputs(Float32 DeltaTime) noexcept;
-    void RenderObjects() noexcept;
-    void RenderOneFrame( const GL::FFrameBufferSize &InBufferSize ) const noexcept;
+    void OneFrame () noexcept;
+    void HandleUserInputs ( Float32 DeltaTime ) noexcept;
+    void RenderObjects () noexcept;
+    void RenderOneFrame ( const GL::FFrameBufferSize &InBufferSize ) const noexcept;
 
     GL::FOpenGLWindow &Window;
     GL::FOpenGLContext &Context;

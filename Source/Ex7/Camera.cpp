@@ -11,34 +11,34 @@
 #include <algorithm>
 #include <cmath>
 
-void CS::FCamera::Rotate(const Float32 DeltaYaw, const Float32 DeltaPitch) noexcept
+void CS::FCamera::Rotate ( const Float32 DeltaYaw, const Float32 DeltaPitch ) noexcept
 {
     Yaw += DeltaYaw;
-    Pitch = std::clamp(Pitch + DeltaPitch, -MaxPitch, MaxPitch);
+    Pitch = std::clamp( Pitch + DeltaPitch, -MaxPitch, MaxPitch );
 }
 
-void CS::FCamera::Zoom(const Float32 ScrollAmount) noexcept
+void CS::FCamera::Zoom ( const Float32 ScrollAmount ) noexcept
 {
-    Distance = std::clamp(Distance * std::exp(-ScrollAmount * ZoomSensitivity), MinDistance, MaxDistance);
+    Distance = std::clamp( Distance * std::exp( -ScrollAmount * ZoomSensitivity ), MinDistance, MaxDistance );
 }
 
-void CS::FCamera::AutoRotate(const Float32 DeltaTime) noexcept
+void CS::FCamera::AutoRotate ( const Float32 DeltaTime ) noexcept
 {
     Yaw += AutoRotationSpeed * DeltaTime;
 }
 
-glm::fvec3 CS::FCamera::GetPosition() const noexcept
+glm::fvec3 CS::FCamera::GetPosition () const noexcept
 {
-    return {Distance * std::cos(Pitch) * std::sin(Yaw), Distance * std::sin(Pitch),
-            Distance * std::cos(Pitch) * std::cos(Yaw)};
+    return { Distance * std::cos( Pitch ) * std::sin( Yaw ), Distance * std::sin( Pitch ),
+             Distance * std::cos( Pitch ) * std::cos( Yaw ) };
 }
 
-glm::fmat4 CS::FCamera::GetViewMatrix() const noexcept
+glm::fmat4 CS::FCamera::GetViewMatrix () const noexcept
 {
-    return glm::lookAt(GetPosition(), glm::fvec3{}, glm::fvec3{0.F, 1.F, 0.F});
+    return glm::lookAt( GetPosition(), glm::fvec3{}, glm::fvec3{ 0.F, 1.F, 0.F } );
 }
 
-glm::fmat4 CS::FCamera::GetProjectionMatrix(const Float32 AspectRatio) const noexcept
+glm::fmat4 CS::FCamera::GetProjectionMatrix ( const Float32 AspectRatio ) const noexcept
 {
-    return glm::perspective(FieldOfViewY, AspectRatio, NearPlane, FarPlane);
+    return glm::perspective( FieldOfViewY, AspectRatio, NearPlane, FarPlane );
 }
