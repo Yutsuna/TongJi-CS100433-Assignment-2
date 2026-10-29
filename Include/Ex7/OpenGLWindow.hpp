@@ -51,6 +51,7 @@ namespace GL
 
         void RequestClose () const noexcept;
         void PollEvents () noexcept;
+        void SwapBuffers() noexcept;
 
     private:
 

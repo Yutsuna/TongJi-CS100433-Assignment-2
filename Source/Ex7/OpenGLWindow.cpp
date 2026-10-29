@@ -139,6 +139,11 @@ void CS::GL::FOpenGLWindow::PollEvents () noexcept
     WindowState->LastCursor   = Cursor;
 }
 
+void CS::GL::FOpenGLWindow::SwapBuffers() noexcept
+{
+    glfwSwapBuffers(WindowState->WindowHandle);
+}
+
 CS::GL::FOpenGLContext::FOpenGLContext ( const FOpenGLWindow &Window )
 {
     glfwMakeContextCurrent( Window.GetNativeHandle() );
