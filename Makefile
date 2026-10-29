@@ -27,7 +27,7 @@ $(BUILD)/%.o: $(SRC)/%.cpp
 	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
 
 define EX_RULE
-$(1)_OBJS := $$(patsubst $$(SRC)/%.cpp,$$(BUILD)/%.o,$$(wildcard $$(SRC)/$(1)/*.cpp))
+$(1)_OBJS := $$(patsubst $$(SRC)/%.cpp,$$(BUILD)/%.o,$$(wildcard $$(SRC)/$(1)/*.cpp $$(SRC)/$(1)/*/*.cpp))
 $(1): $$($(1)_OBJS) $$(LIB)
 	$$(CXX) $$(CXXFLAGS) $$(LDFLAGS) -o $$@ $$($(1)_OBJS) $$(LIB) $$(LDLIBS) $$(LDLIBS_$(1))
 endef
