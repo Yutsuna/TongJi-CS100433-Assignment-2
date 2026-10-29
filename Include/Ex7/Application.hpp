@@ -3,14 +3,15 @@
 
 #pragma once
 
-#include <Ex7/OpenGLApi.hpp>
-#include <Ex7/OpenGLWindow.hpp>
+#include <Ex7/OpenGL/OpenGLApi.hpp>
+#include <Ex7/OpenGL/OpenGLWindow.hpp>
+
+#include <Ex7/Camera.hpp>
+#include <Ex7/SolarSystem.hpp>
+#include <Ex7/Timer.hpp>
 
 namespace CS
 {
-
-class FTimer;
-class FCamera;
 
 /// @class FApplication
 /// @brief Main Application
@@ -34,6 +35,7 @@ private:
 
     FTimer Timer;
     FCamera Camera;
+    FSolarSystem SolarSystem;
 };
 
 } // namespace CS
