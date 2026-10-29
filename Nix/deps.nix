@@ -15,5 +15,6 @@
 
   buildInputs = with pkgs; [
     glm
+    glfw
   ];
 }

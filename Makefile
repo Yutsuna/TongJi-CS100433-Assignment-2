@@ -2,6 +2,7 @@ CXX      := g++
 CXXFLAGS := -std=gnu++26 -freflection -Wall -Wextra -Wpedantic -Werror -Wconversion -IInclude
 DEPFLAGS := -MMD -MP
 LDLIBS   := -lm -lglm
+LDLIBS_Ex7 := -lglfw -lGL
 
 SRC   := Source
 BUILD := Build
@@ -28,7 +29,7 @@ $(BUILD)/%.o: $(SRC)/%.cpp
 define EX_RULE
 $(1)_OBJS := $$(patsubst $$(SRC)/%.cpp,$$(BUILD)/%.o,$$(wildcard $$(SRC)/$(1)/*.cpp))
 $(1): $$($(1)_OBJS) $$(LIB)
-	$$(CXX) $$(CXXFLAGS) $$(LDFLAGS) -o $$@ $$($(1)_OBJS) $$(LIB) $$(LDLIBS)
+	$$(CXX) $$(CXXFLAGS) $$(LDFLAGS) -o $$@ $$($(1)_OBJS) $$(LIB) $$(LDLIBS) $$(LDLIBS_$(1))
 endef
 $(foreach ex,$(EXES),$(eval $(call EX_RULE,$(ex))))
 

@@ -25,6 +25,7 @@ gccStdenv.mkDerivation {
     runHook preInstall
     mkdir -p $out/bin
     mv Ex* $out/bin
+    cp -r Shaders $out/bin/
     runHook postInstall
   '';
 
