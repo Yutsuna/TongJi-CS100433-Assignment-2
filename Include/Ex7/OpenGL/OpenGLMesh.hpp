@@ -10,6 +10,8 @@
 namespace CS
 {
 
+class FMeshBuilder;
+
 namespace GL
 {
 
@@ -33,6 +35,8 @@ namespace GL
         void Draw () const noexcept;
 
     private:
+
+        friend class CS::FMeshBuilder;
 
         FOpenGLMesh ( UInt32 InVertexArrayId,
                       UInt32 InVertexBufferId,

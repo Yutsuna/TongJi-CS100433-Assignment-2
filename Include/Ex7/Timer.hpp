@@ -37,7 +37,7 @@ public:
 
 private:
 
-    static constexpr Float32 MaxDeltaTime = 0.F;
+    static constexpr Float32 MaxDeltaTime = 0.05F;
 
     FClock::time_point StartTime;
     FClock::time_point LastTickTime;

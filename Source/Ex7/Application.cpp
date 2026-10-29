@@ -1,34 +1,29 @@
 /// @file Application.cpp
-/// @brief Main Application implementation
+/// @brief Main application implementation
 
 #include <Ex7/Application.hpp>
 
 #include <Ex7/Camera.hpp>
-#include <Ex7/OpenGLWindow.hpp>
+#include <Ex7/SolarSystem.hpp>
 #include <Ex7/Timer.hpp>
 
+#include <chrono>
 #include <thread>
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <glm/vec2.hpp>
 
 namespace
 {
 
-constexpr CS::Float32 GDragFactor = 0.005F;
-constexpr CS::Float32 GTimeFactor = 1.25F;
+constexpr CS::Float32 DragFactor = 0.005F;
+constexpr CS::Float32 TimeFactor = 1.25F;
 
 } // namespace
-
-///
-/// Public
-///
 
 CS::FApplication::FApplication ( GL::FOpenGLWindow &InWindow, GL::FOpenGLContext &InContext )
     : Window( InWindow ), Context( InContext )
 {
-    Api = Context.GetApi();
 }
 
 void CS::FApplication::Run () noexcept
@@ -39,17 +34,14 @@ void CS::FApplication::Run () noexcept
     }
 }
 
-///
-/// Private
-///
-
 void CS::FApplication::OneFrame () noexcept
 {
     const Float32 DeltaTime = Timer.Tick();
 
     Window.PollEvents();
     HandleUserInputs( DeltaTime );
-    RenderObjects( DeltaTime );
+    SolarSystem.Update( DeltaTime * TimeFactor );
+    RenderObjects();
 }
 
 void CS::FApplication::HandleUserInputs ( const Float32 DeltaTime ) noexcept
@@ -60,7 +52,7 @@ void CS::FApplication::HandleUserInputs ( const Float32 DeltaTime ) noexcept
     }
 
     const glm::fvec2 DragDelta = Window.GetDragDelta();
-    Camera.Rotate( -DragDelta.x * GDragFactor, DragDelta.y * GDragFactor );
+    Camera.Rotate( -DragDelta.x * DragFactor, DragDelta.y * DragFactor );
     Camera.Zoom( Window.GetScrollDelta() );
     Camera.AutoRotate( DeltaTime );
 }
@@ -71,6 +63,7 @@ void CS::FApplication::RenderObjects () noexcept
     if ( BufferSize.Width > 0 and BufferSize.Height > 0 )
     {
         RenderOneFrame( BufferSize );
+        Window.SwapBuffers();
     }
     else
     {
@@ -80,9 +73,11 @@ void CS::FApplication::RenderObjects () noexcept
 
 void CS::FApplication::RenderOneFrame ( const GL::FFrameBufferSize &InBufferSize ) const noexcept
 {
+    const Float32 AspectRatio    = static_cast<Float32>( InBufferSize.Width ) / static_cast<Float32>( InBufferSize.Height );
     const FRenderView RenderView = { .View       = Camera.GetViewMatrix(),
-                                     .Projection = Camera.GetProjectionMatrix( static_cast<Float32>( InBufferSize.Width ) ),
-                                     .Viewport   = InBufferSize,
+                                     .Projection = Camera.GetProjectionMatrix( AspectRatio ),
+                                     .Camera     = Camera.GetPosition(),
+                                     .Viewport   = { InBufferSize.Width, InBufferSize.Height },
                                      .TotalTime  = Timer.GetTotalTime() };
 
     SolarSystem.Render( RenderView );

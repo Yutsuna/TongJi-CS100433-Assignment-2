@@ -1,8 +1,6 @@
 /// @file Camera.cpp
 /// @brief 3D Camera rotating around the origin implementation
 
-#pragma once
-
 #include <Ex7/Camera.hpp>
 
 #include <glm/ext/matrix_clip_space.hpp>
